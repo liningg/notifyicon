@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -41,6 +42,22 @@ namespace WindowsFormsApplication1
                 this.Visible = false;
                 this.notifyIcon1.Visible = true;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string StartupPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonStartup);
+            //获得文件的当前路径  
+            string dir = Directory.GetCurrentDirectory();
+            //获取可执行文件的全部路径  
+            string exeDir = dir + @"\EcgNetPlug.exe.lnk";
+            System.IO.File.Copy(exeDir, StartupPath + @"\EcgNetPlug.exe.lnk", true);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string StartupPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonStartup);
+            System.IO.File.Delete(StartupPath + @"\EcgNetPlug.exe.lnk");
         }
     }
 }
